@@ -1,0 +1,314 @@
+// Exercício 1 - parte 1
+
+public class Fatura {
+    private String numero;
+    private String descricao;
+    private int quantidade;
+    private double precoPorItem;
+
+    public Fatura(String numero, String descricao, int quantidade, double precoPorItem) {
+        this.numero = numero;
+        this.descricao = descricao;
+        setQuantidade(quantidade);
+        setPrecoPorItem(precoPorItem);
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        if (quantidade > 0) {
+            this.quantidade = quantidade;
+        } else {
+            this.quantidade = 0;
+        }
+    }
+
+    public double getPrecoPorItem() {
+        return precoPorItem;
+    }
+
+    public void setPrecoPorItem(double precoPorItem) {
+        if (precoPorItem > 0) {
+            this.precoPorItem = precoPorItem;
+        } else {
+            this.precoPorItem = 0.0;
+        }
+    }
+
+    public double getTotalFatura() {
+        return quantidade * precoPorItem;
+    }
+}
+
+// Parte 2
+
+public class FaturaTeste {
+    public static void main(String[] args) {
+        Fatura fatura1 = new Fatura("123", "Teclado", 2, 50.0);
+        Fatura fatura2 = new Fatura("456", "Mouse", -1, -10.0);
+
+        System.out.println("Fatura 1");
+        System.out.println("Número: " + fatura1.getNumero());
+        System.out.println("Descrição: " + fatura1.getDescricao());
+        System.out.println("Quantidade: " + fatura1.getQuantidade());
+        System.out.println("Preço por item: " + fatura1.getPrecoPorItem());
+        System.out.println("Total da fatura: " + fatura1.getTotalFatura());
+
+        System.out.println();
+
+        System.out.println("Fatura 2");
+        System.out.println("Número: " + fatura2.getNumero());
+        System.out.println("Descrição: " + fatura2.getDescricao());
+        System.out.println("Quantidade: " + fatura2.getQuantidade());
+        System.out.println("Preço por item: " + fatura2.getPrecoPorItem());
+        System.out.println("Total da fatura: " + fatura2.getTotalFatura());
+    }
+}
+
+
+// Exercício 2
+
+public class Empregado {
+    private String nome;
+    private String sobrenome;
+    private double salarioMensal;
+
+    public Empregado(String nome, String sobrenome, double salarioMensal) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        setSalarioMensal(salarioMensal);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public double getSalarioMensal() {
+        return salarioMensal;
+    }
+
+    public void setSalarioMensal(double salarioMensal) {
+        if (salarioMensal >= 0) {
+            this.salarioMensal = salarioMensal;
+        } else {
+            this.salarioMensal = 0;
+        }
+    }
+
+    public double getSalarioAnual() {
+        return salarioMensal * 12;
+    }
+
+    public void aumentarSalario(double percentual) {
+        if (percentual > 0) {
+            salarioMensal += salarioMensal * (percentual / 100);
+        }
+    }
+}
+ // Aplicativo de teste (EmpregadoTeste)
+
+ public class EmpregadoTeste {
+    public static void main(String[] args) {
+        Empregado empregado1 = new Empregado("João", "Silva", 2000.0);
+        Empregado empregado2 = new Empregado("Maria", "Santos", 3000.0);
+
+        System.out.println("Salário anual de " + empregado1.getNome() + " " + empregado1.getSobrenome() + ": "
+                + empregado1.getSalarioAnual());
+        System.out.println("Salário anual de " + empregado2.getNome() + " " + empregado2.getSobrenome() + ": "
+                + empregado2.getSalarioAnual());
+
+        empregado1.aumentarSalario(10);
+        empregado2.aumentarSalario(10);
+
+        System.out.println("Salário anual após aumento de 10% de " + empregado1.getNome() + " "
+                + empregado1.getSobrenome() + ": " + empregado1.getSalarioAnual());
+        System.out.println("Salário anual após aumento de 10% de " + empregado2.getNome() + " "
+                + empregado2.getSobrenome() + ": " + empregado2.getSalarioAnual());
+    }
+}
+
+// Exercício 3
+
+public class Pessoa {
+    private int idade;
+    private int diaNascimento;
+    private int mesNascimento;
+    private int anoNascimento;
+    private String nome;
+
+    public Pessoa(int diaNascimento, int mesNascimento, int anoNascimento, String nome) {
+        this.diaNascimento = diaNascimento;
+        this.mesNascimento = mesNascimento;
+        this.anoNascimento = anoNascimento;
+        this.nome = nome;
+        calculaIdade();
+    }
+
+    public void calculaIdade() {
+        // Obter a data atual
+        int diaAtual = 5;
+        int mesAtual = 7;
+        int anoAtual = 2023;
+
+        // Calcular a idade
+        int idade = anoAtual - anoNascimento;
+        if (mesAtual < mesNascimento || (mesAtual == mesNascimento && diaAtual < diaNascimento)) {
+            idade--;
+        }
+        this.idade = idade;
+    }
+
+    public int informaIdade() {
+        return idade;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + "\nIdade: " + idade;
+    }
+}
+
+// Exercício 4
+
+// Classe Livro
+public class Livro {
+    private String nome;
+    private double preco;
+    private String autor;
+
+    public Livro(String nome, double preco, String autor) {
+        this.nome = nome;
+        this.preco = preco;
+        this.autor = autor;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void imprimirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço: " + preco);
+        System.out.println("Autor: " + autor);
+        System.out.println();
+    }
+}
+
+// Classe CD
+public class CD {
+    private String nome;
+    private double preco;
+    private int numeroFaixas;
+
+    public CD(String nome, double preco, int numeroFaixas) {
+        this.nome = nome;
+        this.preco = preco;
+        this.numeroFaixas = numeroFaixas;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public int getNumeroFaixas() {
+        return numeroFaixas;
+    }
+
+    public void imprimirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço: " + preco);
+        System.out.println("Número de faixas: " + numeroFaixas);
+        System.out.println();
+    }
+}
+
+// Classe DVD
+public class DVD {
+    private String nome;
+    private double preco;
+    private int duracao;
+
+    public DVD(String nome, double preco, int duracao) {
+        this.nome = nome;
+        this.preco = preco;
+        this.duracao = duracao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public void imprimirInformacoes() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço: " + preco);
+        System.out.println("Duração: " + duracao);
+        System.out.println();
+    }
+}
+
+// Classe Loja
+public class Loja {
+    public static void main(String[] args) {
+        Livro livro1 = new Livro("Amor de Redenção", 39.90, "Francine Rivers");
+        Livro livro2 = new Livro("Para todos os garotos que já amei", 29.90, "Jenny Han");
+        CD cd = new CD("Maroon 5", 19.90, 12);
+        DVD dvd = new DVD("Deus não está morto", 29.90, 120);
+        Livro livro3 = new Livro("Príncipe Cruel", 49.90, "Holly Black");
+
+        livro1.imprimirInformacoes();
+        livro2.imprimirInformacoes();
+        cd.imprimirInformacoes();
+        dvd.imprimirInformacoes();
+        livro3.imprimirInformacoes();
+    }
+}
